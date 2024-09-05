@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code-Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="main-div">
+        <div class="top">
+            <div class="html">
+                <label>HTML Code</label>
+                <textarea onkeyup="runCode()" name="" id="html"></textarea>
+            </div>
+            <div class="css">
+                <label>CSS Code</label>
+                <textarea onkeyup="runCode()" name="" id="css"></textarea>
+            </div>
+            <div class="js">
+                <label>JS Code</label>
+                <textarea onkeyup="runCode()" name="" id="js"></textarea>
+            </div>
+        </div>
+
+        <div class="output-block">
+            <button onclick="maxSize()" id="max-btn">Output &#8679;</button>
+            <button onclick="minSize()" id="min-btn">Output &#8681;</button>
+            <iframe id="web-output">
+
+            </iframe>
+        </div>
+    </div>
+
+
+    <script>
+        
+        function runCode(){
+
+            let htmlCode = document.getElementById('html').value;
+            let cssCode = document.getElementById('css').value;
+            let jsCode = document.getElementById('js').value;
+            let webOutput = document.getElementById('web-output');
+            
+            webOutput.contentDocument.body.innerHTML = htmlCode + '<style>'+cssCode+'</style>';
+            webOutput.contentWindow.eval(jsCode);
+
+        }
+
+        function maxSize(){
+            document.getElementById('web-output').style.height = '86vh';
+            document.getElementById('max-btn').style.display = 'none';
+            document.getElementById('min-btn').style.display = 'block';
+        }
+        function minSize(){
+            document.getElementById('web-output').style.height = '18vh';
+            document.getElementById('max-btn').style.display = '';
+            document.getElementById('min-btn').style.display = 'none';
+        }
+
+    </script>
+
+</body>
+</html>
